@@ -1,0 +1,611 @@
+:root {
+  --animation-height: 300px;
+  --animation-width: 750px;
+
+  --rain-height: 600px;
+  --rain-width: 1250px;
+
+  --snow-height: 600px;
+  --snow-width: 1250px;
+}
+/* can you use media queries on variables? */
+
+
+#map {
+  display: grid;
+  grid-template-columns: repeat(480, 3px);
+  grid-template-rows: repeat(250, 3px);
+  background:url("images/world-map.jpg");
+  background-repeat: no-repeat;
+}
+/* Size of each city circle */
+img {
+  width: 8px;
+  height: 8px;
+}
+img:hover {
+  cursor: pointer;
+}
+
+#top-row {
+  display: flex;
+}
+#current-info {
+  width: 180px;
+  height: 300px;
+}
+#debug-buttons {
+  max-width: 200px;
+  min-width: 150px;
+  width: 30%;
+}
+
+#city-name {
+  text-transform: capitalize;
+  margin-right: auto;
+  width: 100%;
+  text-align: center;
+  font-size: 200%;
+}
+
+
+
+#animation-box {
+  display: grid;
+  grid-template: 1fr / 1fr;
+  position: relative;
+  height: var(--animation-height);
+  width: var(--animation-width);
+  overflow: hidden;
+}
+.weather-layer {
+  transition-delay: 0.5s;
+  /* transition-delay: background 0.5s; */
+  transition-timing-function: ease-out;
+  grid-column-start: 1;
+  grid-row-start: 1;
+  height: var(--animation-height);
+  width: var(--animation-width);
+}
+#daylight-layer {
+  background: url(images/daytime-12.svg) no-repeat;
+  z-index: 1;
+  position: absolute;
+  top: 490px;
+  left: 225px;
+  transform: scale(5) rotate(60deg);
+
+  /* Keep the dimensions square so that I get proper rotations */
+  height: var(--animation-height);
+  width: var(--animation-height);
+
+
+
+
+
+  /* background-position: center;  */
+}
+#house-layer {
+  /* I have 2 house images because for some reason the image has small semi-transparent gaps between some layers on the roof */
+  background: url(images/house.svg) no-repeat,
+              url(images/house.svg) no-repeat;
+  z-index: 2;
+  height: var(--animation-height);
+  width: var(--animation-width);
+}
+#temperature-layer {
+  z-index: 3;
+  background-blend-mode: overlay;
+  opacity: 1;
+}
+#visibility-layer {
+  background: linear-gradient(rgba(200, 200, 200, 1), rgba(200, 200, 200, 0));
+  z-index: 4;
+  opacity: 0;
+}
+#clouds-layer {
+  background: url(images/clouds-0.svg) repeat-x;
+  z-index: 5;
+  position: relative;
+  bottom: 100px;
+}
+@keyframes clouds {
+  
+}
+#rain-layer {
+  z-index: 6;
+  /* animation: rain 0.8s linear infinite; */
+  animation: none;
+  height: var(--rain-height);
+  width: var(--rain-width);
+  opacity: 0;
+}
+@keyframes rain {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 var(--rain-height);
+  }
+}
+#snow-layer {
+  background: url(images/snow-0.svg);
+  z-index: 7;
+  /* animation: snowing 3s linear infinite; */
+  animation: none;
+  height: var(--snow-height);
+  width: var(--snow-width);
+  opacity: 0;
+}
+@keyframes snowing {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 var(--snow-height);
+  }
+}
+#wind-layer {
+  background: url(images/wind.svg) repeat-x;
+  z-index: 8;
+  /* animation: wind 2s linear infinite; */
+  animation: none;
+  opacity: 0;
+}
+@keyframes wind {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: var(--animation-width) 0;
+  }
+}
+/* If it's really cloudy or snowing, desaturate the sky*/
+#desaturation-layer {
+  background-color: gray;
+  background-blend-mode: saturation;
+}
+
+/* Must come after desaturation layer since lightning always needs to be yellow */
+#thunder-layer {
+  background: yellow;
+  z-index: 9;
+  animation: none;
+  opacity: 0;
+}
+@keyframes thunder {
+  from { 
+    opacity: 0;
+  }
+  98% {
+    opacity: 0;
+  }
+  99% {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+
+
+/* Canadian Cities */
+#calgary {
+  grid-column-start: 78;
+  grid-row-start: 81;
+}
+#charlottetown {
+  grid-column-start: 148;
+  grid-row-start: 91;
+}
+#edmonton {
+  grid-column-start: 80;
+  grid-row-start: 75;
+}
+#fort-mcmurray {
+  grid-column-start: 82;
+  grid-row-start: 69;
+}
+#fredericton {
+  grid-column-start: 144;
+  grid-row-start: 92;
+}
+#halifax {
+  grid-column-start: 148;
+  grid-row-start: 94;
+}
+#iqaluit {
+  grid-column-start: 141;
+  grid-row-start: 58;
+}
+#montreal {
+  grid-column-start: 134;
+  grid-row-start: 92;
+}
+#quebec {
+  grid-column-start: 138;
+  grid-row-start: 90;
+}
+#regina {
+  grid-column-start: 91;
+  grid-row-start: 83;
+}
+#saskatoon {
+  grid-column-start: 88;
+  grid-row-start: 78;
+}
+#st-johns {
+  grid-column-start: 162;
+  grid-row-start: 90;
+}
+#toronto {
+  grid-column-start: 127;
+  grid-row-start: 96;
+}
+#vancouver {
+  grid-column-start: 66;
+  grid-row-start: 86;
+}
+#victoria {
+  grid-column-start: 65;
+  grid-row-start: 89;
+}
+#whitehorse {
+  grid-column-start: 53;
+  grid-row-start: 64;
+}
+#winnipeg {
+  grid-column-start: 99;
+  grid-row-start: 84;
+}
+#yellowknife {
+  grid-column-start: 79;
+  grid-row-start: 60;
+}
+
+/* US Cities */
+#boston {
+  grid-column-start: 139;
+  grid-row-start: 96;
+}
+#dallas {
+  grid-column-start: 103;
+  grid-row-start: 112;
+}
+#denver {
+  grid-column-start: 90;
+  grid-row-start: 105;
+}
+#detroit {
+  grid-column-start: 121;
+  grid-row-start: 99;
+}
+#las-vegas {
+  grid-column-start: 77;
+  grid-row-start: 105;
+}
+#los-angeles {
+  grid-column-start: 72;
+  grid-row-start: 111;
+}
+#memphis {
+  grid-column-start: 112;
+  grid-row-start: 109;
+}
+#miami {
+  grid-column-start: 125;
+  grid-row-start: 125;
+}
+#minneapolis {
+  grid-column-start: 106;
+  grid-row-start: 96;
+}
+#new-orleans {
+  grid-column-start: 111;
+  grid-row-start: 118;
+}
+#new-york {
+  grid-column-start: 136;
+  grid-row-start: 100;
+}
+#phoenix {
+  grid-column-start: 82;
+  grid-row-start: 112;
+}
+#san-jose {
+  grid-column-start: 66;
+  grid-row-start: 105;
+}
+#seattle {
+  grid-column-start: 68;
+  grid-row-start: 92;
+}
+
+/* Greenland City */
+#nuuk {
+  grid-column-start: 165;
+  grid-row-start: 55;
+}
+
+/* Latin American Cities */
+#asunción {
+  grid-column-start: 156;
+  grid-row-start: 196;
+}
+#bogota {
+  grid-column-start: 133;
+  grid-row-start: 154;
+}
+#brasilia {
+  grid-column-start: 169;
+  grid-row-start: 183;
+}
+#buenos-aires {
+  grid-column-start: 155;
+  grid-row-start: 212;
+}
+#caracas {
+  grid-column-start: 144;
+  grid-row-start: 147;
+}
+#cayenne {
+  grid-column-start: 163;
+  grid-row-start: 154;
+}
+#georgetown {
+  grid-column-start: 156;
+  grid-row-start: 152;
+}
+#guatemala-city {
+  grid-column-start: 111;
+  grid-row-start: 140;
+}
+#havana {
+  grid-column-start: 122;
+  grid-row-start: 129;
+}
+#lima {
+  grid-column-start: 129;
+  grid-row-start: 177;
+}
+#managua {
+  grid-column-start: 118;
+  grid-row-start: 144;
+}
+#mexico-city {
+  grid-column-start: 98;
+  grid-row-start: 134;
+}
+#montevideo {
+  grid-column-start: 158;
+  grid-row-start: 210;
+}
+#panama-city {
+  grid-column-start: 126;
+  grid-row-start: 149;
+}
+#paramaribo {
+  grid-column-start: 159;
+  grid-row-start: 153;
+}
+#port-au-prince {
+  grid-column-start: 135;
+  grid-row-start: 135;
+}
+#quito {
+  grid-column-start: 128;
+  grid-row-start: 162;
+}
+#san-josé {
+  grid-column-start: 119;
+  grid-row-start: 148;
+}
+#san-juan {
+  grid-column-start: 145;
+  grid-row-start: 135;
+}
+#san-salvador {
+  grid-column-start: 113;
+  grid-row-start: 142;
+}
+#santiago {
+  grid-column-start: 138;
+  grid-row-start: 209;
+}
+#santo-domingo {
+  grid-column-start: 139;
+  grid-row-start: 135;
+}
+#sucre {
+  grid-column-start: 146;
+  grid-row-start: 186;
+}
+#tegucigalpa {
+  grid-column-start: 116;
+  grid-row-start: 141;
+}
+
+/* European Cities */
+#amsterdam {
+  grid-column-start: 243;
+  grid-row-start: 81;
+}
+#ankara {
+  grid-column-start: 281;
+  grid-row-start: 104;
+}
+#berlin {
+  grid-column-start: 253;
+  grid-row-start: 81;
+}
+#budapest {
+  grid-column-start: 262;
+  grid-row-start: 91;
+}
+#dikson {
+  grid-column-start: 370;
+  grid-row-start: 30;
+}
+#helsinki {
+  grid-column-start: 270;
+  grid-row-start: 66;
+}
+#london {
+  grid-column-start: 235;
+  grid-row-start: 83;
+}
+#madrid {
+  grid-column-start: 231;
+  grid-row-start: 102;
+}
+#moscow {
+  grid-column-start: 288;
+  grid-row-start: 75;
+}
+#paris {
+  grid-column-start: 239;
+  grid-row-start: 89;
+}
+#reykjavik {
+  grid-column-start: 206;
+  grid-row-start: 58;
+}
+#stockholm {
+  grid-column-start: 260;
+  grid-row-start: 68;
+}
+#tiksi {
+  grid-column-start: 412;
+  grid-row-start: 38;
+}
+#vorkuta {
+  grid-column-start: 326;
+  grid-row-start: 50;
+}
+#ust-nera {
+  grid-column-start: 434;
+  grid-row-start: 55;
+}
+#yakutsk {
+  grid-column-start: 417;
+  grid-row-start: 62;
+}
+
+/* Asian Cities */
+#baghdad {
+  grid-column-start: 296;
+  grid-row-start: 112;
+}
+#beijing {
+  grid-column-start: 396;
+  grid-row-start: 102;
+}
+#beirut {
+  grid-column-start: 285;
+  grid-row-start: 112;
+}
+#dhaka {
+  grid-column-start: 360;
+  grid-row-start: 127;
+}
+#hanoi {
+  grid-column-start: 381;
+  grid-row-start: 131;
+}
+#jakarta {
+  grid-column-start: 383;
+  grid-row-start: 169;
+}
+#jerusalem {
+  grid-column-start: 284;
+  grid-row-start: 116;
+}
+#jiayuguan {
+  grid-column-start: 373;
+  grid-row-start: 102;
+}
+#karachi {
+  grid-column-start: 328;
+  grid-row-start: 125;
+}
+#manila {
+  grid-column-start: 402;
+  grid-row-start: 139;
+}
+#seoul {
+  grid-column-start: 412;
+  grid-row-start: 108;
+}
+#shanghai {
+  grid-column-start: 401;
+  grid-row-start: 116;
+}
+#tashkent {
+  grid-column-start: 331;
+  grid-row-start: 101;
+}
+#tehran {
+  grid-column-start: 306;
+  grid-row-start: 110;
+}
+#tokyo {
+  grid-column-start: 428;
+  grid-row-start: 109;
+}
+
+/* Oceanic Cities */
+#auckland {
+  grid-column-start: 476;
+  grid-row-start: 213;
+}
+#cairns {
+  grid-column-start: 436;
+  grid-row-start: 183;
+}
+#honolulu {
+  grid-column-start: 18;
+  grid-row-start: 131;
+}
+#sydney {
+  grid-column-start: 445;
+  grid-row-start: 208;
+}
+#tarawa {
+  grid-column-start: 475;
+  grid-row-start: 160;
+}
+
+/* African Cities */
+#accra {
+  grid-column-start: 229;
+  grid-row-start: 153;
+}
+#addis-ababa {
+  grid-column-start: 289;
+  grid-row-start: 147;
+}
+#antananarivo {
+  grid-column-start: 301;
+  grid-row-start: 187;
+}
+#bamako {
+  grid-column-start: 226;
+  grid-row-start: 143;
+}
+#bangui {
+  grid-column-start: 261;
+  grid-row-start: 154;
+}
+#ndjamena {
+  grid-column-start: 257;
+  grid-row-start: 142;
+}
+#pretoria {
+  grid-column-start: 275;
+  grid-row-start: 198;
+}
+#tripoli {
+  grid-column-start: 255;
+  grid-row-start: 115;
+}

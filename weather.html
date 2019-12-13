@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="weather.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <nav>
+    <ul>
+      <li><a href="index.html">HOME</a></li>
+      <li><a href="weather.html">API VISUALIZER</a></li>
+      <li><a>POKER CALCULATOR</a></li>
+      <li><a>2-PLAYER BATTLESHIP</a></li>
+      <li><a>2D/3D GRAPHIC DESIGN</a></li>
+    </ul>
+  </nav>
+  <!-- Use ejs to make a for loop to generate the buttons if possible -->
+  <!-- Quebed City is just called Quebec -->
+  <div id="top-row">
+    <textarea id="current-info"></textarea>
+    <div id="animation-box">
+      <div class="weather-layer" id="house-layer"></div>
+      <div class="weather-layer" id="daylight-layer"></div>
+      <div class="weather-layer" id="temperature-layer"></div>
+      <div class="weather-layer" id="visibility-layer"></div>
+      <div class="weather-layer" id="clouds-layer"></div>
+      <div class="weather-layer" id="thunder-layer"></div>
+      <div class="weather-layer" id="rain-layer"></div>
+      <div class="weather-layer" id="snow-layer"></div>
+      <div class="weather-layer" id="wind-layer"></div>
+      <div class="weather-layer" id="desaturation-layer"></div>
+    </div>
+
+    <div id="debug-buttons"> DEBUGGING TOOLS:<br>timezone = +0h, <br>dayLength = 14h, <br>temperature & wind are neutral by default, <br>visibility maximum by default<br>
+      <button id="debug-heavy-rain">Heavy Rain</button>
+      <button id="debug-heavy-snow">Heavy Snow</button>
+      <button id="debug-thunderstorm">Thunderstorm</button>
+      <button id="debug-windy-rain">Windy Rain</button>
+      <button id="debug-really-windy-rain">Really Windy Rain</button>
+      <button id="debug-windy-snow">Windy Snow</button>
+      <button id="debug-really-windy-snow">Really Windy Snow</button>
+      <button id="debug-super-cold">-60°C</button>
+      <button id="debug-super-hot">+60°C</button>
+      <button id="debug-poor-visibility">Poor Visibility</button>
+    </div>
+  </div>
+
+  <h3 id="city-name">Choose A City</h3>
+
+  <div id="map">
+    <!-- Canadian Cities -->
+    <img src="images/city-dot.svg" id="calgary">
+    <img src="images/city-dot.svg" id="charlottetown">
+    <img src="images/city-dot.svg" id="edmonton">
+    <img src="images/city-dot.svg" id="fort-mcmurray">
+    <img src="images/city-dot.svg" id="fredericton">
+    <img src="images/city-dot.svg" id="halifax">
+    <img src="images/city-dot.svg" id="iqaluit">
+    <img src="images/city-dot.svg" id="montreal">
+    <img src="images/city-dot.svg" id="quebec">
+    <img src="images/city-dot.svg" id="regina">
+    <img src="images/city-dot.svg" id="saskatoon">
+    <img src="images/city-dot.svg" id="st-johns">
+    <img src="images/city-dot.svg" id="toronto">
+    <img src="images/city-dot.svg" id="vancouver">
+    <img src="images/city-dot.svg" id="victoria">
+    <img src="images/city-dot.svg" id="whitehorse">
+    <img src="images/city-dot.svg" id="winnipeg">
+    <img src="images/city-dot.svg" id="yellowknife">
+    <!-- US Cities -->
+    <img src="images/city-dot.svg" id="boston">
+    <img src="images/city-dot.svg" id="dallas">
+    <img src="images/city-dot.svg" id="denver">
+    <img src="images/city-dot.svg" id="detroit">
+    <img src="images/city-dot.svg" id="las-vegas">
+    <img src="images/city-dot.svg" id="los-angeles">
+    <img src="images/city-dot.svg" id="memphis">
+    <img src="images/city-dot.svg" id="miami">
+    <img src="images/city-dot.svg" id="minneapolis">
+    <img src="images/city-dot.svg" id="new-orleans">
+    <img src="images/city-dot.svg" id="new-york">
+    <img src="images/city-dot.svg" id="phoenix">
+    <img src="images/city-dot.svg" id="san-jose">
+    <img src="images/city-dot.svg" id="seattle">
+    <!-- Greenland City -->
+    <img src="images/city-dot.svg" id="nuuk">
+    <!-- Latin American Cities -->
+    <img src="images/city-dot.svg" id="asunción">
+    <img src="images/city-dot.svg" id="bogota">
+    <img src="images/city-dot.svg" id="brasilia">
+    <img src="images/city-dot.svg" id="buenos-aires">
+    <img src="images/city-dot.svg" id="caracas">
+    <img src="images/city-dot.svg" id="cayenne">
+    <img src="images/city-dot.svg" id="georgetown">
+    <img src="images/city-dot.svg" id="guatemala-city">
+    <img src="images/city-dot.svg" id="havana">
+    <img src="images/city-dot.svg" id="lima">
+    <img src="images/city-dot.svg" id="managua">
+    <img src="images/city-dot.svg" id="mexico-city">
+    <img src="images/city-dot.svg" id="montevideo">
+    <img src="images/city-dot.svg" id="panama-city">
+    <img src="images/city-dot.svg" id="paramaribo">
+    <img src="images/city-dot.svg" id="port-au-prince">
+    <img src="images/city-dot.svg" id="quito">
+    <img src="images/city-dot.svg" id="san-josé">
+    <img src="images/city-dot.svg" id="san-juan">
+    <img src="images/city-dot.svg" id="san-salvador">
+    <img src="images/city-dot.svg" id="santiago">
+    <img src="images/city-dot.svg" id="santo-domingo">
+    <img src="images/city-dot.svg" id="sucre">
+    <img src="images/city-dot.svg" id="tegucigalpa">
+    <!-- European Cities -->
+    <img src="images/city-dot.svg" id="amsterdam">
+    <img src="images/city-dot.svg" id="ankara">
+    <img src="images/city-dot.svg" id="berlin">
+    <img src="images/city-dot.svg" id="budapest">
+    <img src="images/city-dot.svg" id="dikson">
+    <img src="images/city-dot.svg" id="helsinki">
+    <img src="images/city-dot.svg" id="london">
+    <img src="images/city-dot.svg" id="madrid">
+    <img src="images/city-dot.svg" id="moscow">
+    <img src="images/city-dot.svg" id="paris">
+    <img src="images/city-dot.svg" id="reykjavik">
+    <img src="images/city-dot.svg" id="stockholm">
+    <img src="images/city-dot.svg" id="tiksi">
+    <img src="images/city-dot.svg" id="vorkuta">
+    <img src="images/city-dot.svg" id="ust-nera">
+    <img src="images/city-dot.svg" id="yakutsk">
+    <!-- Asian Cities -->
+    <img src="images/city-dot.svg" id="baghdad">
+    <img src="images/city-dot.svg" id="beijing">
+    <img src="images/city-dot.svg" id="beirut">
+    <img src="images/city-dot.svg" id="dhaka">
+    <img src="images/city-dot.svg" id="hanoi">
+    <img src="images/city-dot.svg" id="jakarta">
+    <img src="images/city-dot.svg" id="jerusalem">
+    <img src="images/city-dot.svg" id="jiayuguan">
+    <img src="images/city-dot.svg" id="karachi">
+    <img src="images/city-dot.svg" id="manila">
+    <img src="images/city-dot.svg" id="seoul">
+    <img src="images/city-dot.svg" id="shanghai">
+    <img src="images/city-dot.svg" id="tashkent">
+    <img src="images/city-dot.svg" id="tehran">
+    <img src="images/city-dot.svg" id="tokyo">
+    <!-- Oceanic Cities -->
+    <img src="images/city-dot.svg" id="auckland">
+    <img src="images/city-dot.svg" id="cairns">
+    <img src="images/city-dot.svg" id="honolulu">
+    <img src="images/city-dot.svg" id="sydney">
+    <img src="images/city-dot.svg" id="tarawa">
+    <!-- African Cities -->
+    <img src="images/city-dot.svg" id="accra">
+    <img src="images/city-dot.svg" id="addis-ababa">
+    <img src="images/city-dot.svg" id="antananarivo">
+    <img src="images/city-dot.svg" id="bamako">
+    <img src="images/city-dot.svg" id="bangui">
+    <img src="images/city-dot.svg" id="ndjamena">
+    <img src="images/city-dot.svg" id="pretoria">
+    <img src="images/city-dot.svg" id="tripoli">
+  </div>
+</body>
+
+<script type="text/javascript" src='./app.js'></script>
+</html>
