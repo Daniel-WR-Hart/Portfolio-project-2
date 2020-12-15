@@ -147,25 +147,28 @@ function setCityURLs(cityData)
 {
   // Use this to get the 2-character country codes https://www.worldatlas.com/aatlas/ctycodes.htm
   // Use this to make sure that the cities your checking have the correct time zone https://www.timeanddate.com/worldclock/
+  const res = await fetch('/netlifyFunctions/functions');
+  const key = await res.json();
 
+  
   for (i = 0; i < TOTAL_CITIES; i++)
   {
     let cityName = formatCityNameForURL(htmlIds[i]);
     
     cityData.urls[i] = 
-      `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=e1151ce970fe6da878fd15e21f475899`;
+      `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${key}`;
 
 
     // Special case where cities have names that are automatically converted into HTML format. The API requires for the special character to be unchanged.
     // The ó will become &#243; if handled in the previous if-else. Also needs country code because the PH version is the default.
     // I confirmed that this is for the capital of Paraguay/PY
     if (cityName === "asunción")
-      cityData.urls[i] = "http://api.openweathermap.org/data/2.5/weather?q=asunción,py&appid=e1151ce970fe6da878fd15e21f475899";
+      cityData.urls[i] = "http://api.openweathermap.org/data/2.5/weather?q=asunción,py&appid=${key}";
     // I confirmed that this is for the capital of Costa Rica/CR
     else if (cityName === "san+josé")
-      cityData.urls[i] = "http://api.openweathermap.org/data/2.5/weather?q=san+josé,cr&appid=e1151ce970fe6da878fd15e21f475899";
+      cityData.urls[i] = "http://api.openweathermap.org/data/2.5/weather?q=san+josé,cr&appid=${key}";
     else if (cityName === "victoria")
-      cityData.urls[i] = "http://api.openweathermap.org/data/2.5/weather?lat=48.41&lon=-123.33&appid=e1151ce970fe6da878fd15e21f475899";
+      cityData.urls[i] = "http://api.openweathermap.org/data/2.5/weather?lat=48.41&lon=-123.33&appid=${key}";
   }
 }
 function formatCityNameForURL(cityName){
