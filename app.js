@@ -149,7 +149,8 @@ function setCityURLs(cityData)
   // Use this to make sure that the cities your checking have the correct time zone https://www.timeanddate.com/worldclock/
   const res = await fetch('/netlifyFunctions/functions');
   const key = await res.json();
-
+  console.log(res);
+  console.log(key);
   
   for (i = 0; i < TOTAL_CITIES; i++)
   {
