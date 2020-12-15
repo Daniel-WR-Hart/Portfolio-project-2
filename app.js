@@ -153,7 +153,7 @@ function setCityURLs(cityData)
     let cityName = formatCityNameForURL(htmlIds[i]);
     
     cityData.urls[i] = 
-      `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=e1151ce970fe6da878fd15e21f475899`;
+      `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=e1151ce970fe6da878fd15e21f475899`;
 
 
     // Special case where cities have names that are automatically converted into HTML format. The API requires for the special character to be unchanged.
