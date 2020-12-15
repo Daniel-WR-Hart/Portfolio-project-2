@@ -11,8 +11,8 @@ const snowLayer = document.querySelector("#snow-layer");
 const windLayer = document.querySelector("#wind-layer");
 const desaturationLayer = document.querySelector("#desaturation-layer");
 
-const res = await fetch('/netlifyFunctions/functions');
-const key = await res.json();
+const res = fetch('/netlifyFunctions/functions');
+const key = res.json();
 console.log(res);
 console.log(key);
 
