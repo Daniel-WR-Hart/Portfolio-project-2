@@ -12,9 +12,10 @@ const windLayer = document.querySelector("#wind-layer");
 const desaturationLayer = document.querySelector("#desaturation-layer");
 
 const res = fetch('/netlifyFunctions/functions');
-const key = res.json();
+//const key = res.json();
+const key = '';
 console.log(res);
-console.log(key);
+//console.log(key);
 
 
 
