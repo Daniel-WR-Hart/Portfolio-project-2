@@ -11,6 +11,12 @@ const snowLayer = document.querySelector("#snow-layer");
 const windLayer = document.querySelector("#wind-layer");
 const desaturationLayer = document.querySelector("#desaturation-layer");
 
+const res = await fetch('/netlifyFunctions/functions');
+const key = await res.json();
+console.log(res);
+console.log(key);
+
+
 
 // 102 Total Cities
 const htmlIds = [
@@ -143,21 +149,16 @@ function setQuerySelectors(cityData)
       console.log(htmlIds[i]);
   }
 }
-async function setCityURLs(cityData)
+function setCityURLs(cityData)
 {
   // Use this to get the 2-character country codes https://www.worldatlas.com/aatlas/ctycodes.htm
   // Use this to make sure that the cities your checking have the correct time zone https://www.timeanddate.com/worldclock/
-  const res = await fetch('/netlifyFunctions/functions');
-  const key = await res.json();
-  console.log(res);
-  console.log(key);
   
   for (i = 0; i < TOTAL_CITIES; i++)
   {
     let cityName = formatCityNameForURL(htmlIds[i]);
     
-    cityData.urls[i] = 
-      `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${key}`;
+    cityData.urls[i] = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${key}`;
 
 
     // Special case where cities have names that are automatically converted into HTML format. The API requires for the special character to be unchanged.
