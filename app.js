@@ -143,7 +143,7 @@ function setQuerySelectors(cityData)
       console.log(htmlIds[i]);
   }
 }
-function setCityURLs(cityData)
+async function setCityURLs(cityData)
 {
   // Use this to get the 2-character country codes https://www.worldatlas.com/aatlas/ctycodes.htm
   // Use this to make sure that the cities your checking have the correct time zone https://www.timeanddate.com/worldclock/
