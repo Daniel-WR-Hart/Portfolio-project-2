@@ -13,9 +13,9 @@ const desaturationLayer = document.querySelector("#desaturation-layer");
 
 
 
-const res = fetch('/NetlifyFunctions/functions');
-// const res = fetch('/api/functions');
-// const res = fetch('/.netlify/api/:splat/functions');
+const res = fetch('/NetlifyFunctions/getApiKey');
+// const res = fetch('/api/getApiKey');
+// const res = fetch('/.netlify/api/:splat/getApiKey');
 // const key = res.json();
 // const key = '';
 // const key = process.env.apiKey;
