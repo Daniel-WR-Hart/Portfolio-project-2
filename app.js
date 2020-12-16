@@ -29,10 +29,10 @@ const desaturationLayer = document.querySelector("#desaturation-layer");
 // (await res).json().msg;
 // console.log(key);
 
-
+let res;
 fetch('/.netlify/functions/getApiKey')
   .then(res => res.json())
-  .then(data => console.log(data));
+  .then(data => res = data);
 
 // 102 Total Cities
 const htmlIds = [
