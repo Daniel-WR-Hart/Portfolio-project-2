@@ -1,12 +1,12 @@
 // require('dotenv').config();
-const { API_KEY } = process.env;
+// const { API_KEY } = process.env;
 
-exports.handler = async (event, context) => {
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ msg: API_KEY })
-  };
-};
+// exports.handler = async (event, context) => {
+//   return {
+//     statusCode: 200,
+//     body: JSON.stringify({ msg: API_KEY })
+//   };
+// };
 
 
 // exports.handler = () => {
@@ -23,3 +23,12 @@ exports.handler = async (event, context) => {
 //     body: JSON.stringify({ msg: "2nd" })
 //   });
 // }
+
+
+const { API_KEY } = process.env;
+exports.handler = function(event, context, callback) {
+  callback(null, {
+    statusCode: 200,
+    body: JSON.stringify({ msg: API_KEY })
+  });
+}
