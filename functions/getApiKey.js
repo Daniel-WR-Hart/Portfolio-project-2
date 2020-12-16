@@ -25,10 +25,19 @@
 // }
 
 
-const { API_KEY } = process.env;
+const { apiKey } = process.env;
 exports.handler = function(event, context, callback) {
   callback(null, {
     statusCode: 200,
-    body: JSON.stringify({ msg: API_KEY })
+    body: JSON.stringify({ msg: apiKey })
   });
 }
+
+
+// const { API_KEY } = process.env;
+// exports.handler = function(event, context, callback) {
+//   callback(null, {
+//     statusCode: 200,
+//     body: JSON.stringify({ msg: API_KEY })
+//   });
+// }
