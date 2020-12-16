@@ -22,10 +22,11 @@ const desaturationLayer = document.querySelector("#desaturation-layer");
 // const key = process.env.apiKey;
 
 
+// undefined
+// const res = (await fetch('/.netlify/functions/getApiKey')).json();
 
-const res = (await fetch('/.netlify/functions/getApiKey')).json();
-
-console.log(res);
+const res = fetch('/.netlify/functions/getApiKey');
+// console.log((await res).json());
 // console.log(key);
 
 
