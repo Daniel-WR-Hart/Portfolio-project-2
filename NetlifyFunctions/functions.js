@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { apiKey } = process.env;
 
 exports.handler = async (event, context) => {
