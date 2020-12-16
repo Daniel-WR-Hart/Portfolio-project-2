@@ -1,10 +1,10 @@
-require('dotenv').config();
-const { apiKey } = process.env;
+// require('dotenv').config();
+const { API_KEY } = process.env;
 
 exports.handler = async (event, context) => {
   return {
     statusCode: 200,
-    body: JSON.stringify({ msg: apiKey })
+    body: JSON.stringify({ msg: API_KEY })
   };
 };
 
