@@ -29,6 +29,6 @@ const { API_KEY } = process.env;
 exports.handler = function(event, context, callback) {
   callback(null, {
     statusCode: 200,
-    body: JSON.stringify({ msg: API_KEY, greeting: "hi" })
+    body: JSON.stringify({ msg: API_KEY })
   });
 }
