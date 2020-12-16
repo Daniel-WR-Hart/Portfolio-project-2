@@ -9,7 +9,7 @@
 // };
 
 
-exports.handler = async () => {
+exports.handler = () => {
   return {
     statusCode: 200,
     body: "hello"
