@@ -11,12 +11,14 @@ const snowLayer = document.querySelector("#snow-layer");
 const windLayer = document.querySelector("#wind-layer");
 const desaturationLayer = document.querySelector("#desaturation-layer");
 
-const res = fetch('/api/functions');
+// const res = fetch('/api/functions');
 // const res = fetch('/.netlify/api/:splat/functions');
-//const key = res.json();
-const key = '';
-console.log(res);
-//console.log(key);
+// const key = res.json();
+// const key = '';
+const key = process.env.apiKey;
+
+// console.log(res);
+console.log(key);
 
 
 
