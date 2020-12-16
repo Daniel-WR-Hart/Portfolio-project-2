@@ -13,7 +13,7 @@ const desaturationLayer = document.querySelector("#desaturation-layer");
 
 
 
-const res = fetch('/.netlify/functions/getApiKey');
+// const res = fetch('/.netlify/functions/getApiKey');
 // const res = fetch('/functions/getApiKey');
 // const res = fetch('/api/getApiKey');
 // const res = fetch('/.netlify/api/:splat/getApiKey');
@@ -21,8 +21,12 @@ const res = fetch('/.netlify/functions/getApiKey');
 // const key = '';
 // const key = process.env.apiKey;
 
-// console.log(res);
-console.log(key);
+
+
+const res = fetch('/.netlify/functions/getApiKey');
+
+console.log(res);
+// console.log(key);
 
 
 
